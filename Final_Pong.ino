@@ -350,7 +350,7 @@ void loop() {
     movement[1] = 0;
     tft.drawPixel(116, estimated_pos, BLACK);
     if (movement[2] > 0) {                        //If the ball is heading towards player2, player 2 starts to move
-      if (level == 2) {                         // If the game is in Hard Mode
+      if (level == 2) {                         // If the game is in Hard Mode, paddle2 will estimate where the ball goes
         estimated_pos = abs((ball[1] - 2) + (116 - ball[0]) * movement[3] / movement[2]);
         //estimated_pos may be larger than 124, which is the max y for the ball
         while (estimated_pos >= 124) estimated_pos = abs(246 - estimated_pos);
@@ -364,7 +364,7 @@ void loop() {
         if (paddle_2 + movement[1] >= 117) movement[1] = 117-paddle_2;
         if (paddle_2 + movement[1] <= 10) movement[1] = 10-paddle_2;
       } else {
-        //If the mode of the game is EASY or MEDIUM, paddle 2 will only move occationally, with the max speed of 3
+        //If the mode of the game is EASY or MEDIUM, paddle 2 will only follow the ball and move occationally, with the max speed of 3
         if (random(4-level) < 2) {   
           if (paddle_2 - ball[1] > 2) movement[1] = -3;
           else if (ball[1] - paddle_2 > 2) movement[1] = 3;
@@ -492,4 +492,3 @@ void loop() {
 
 }
 
-/**/
